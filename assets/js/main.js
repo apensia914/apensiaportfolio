@@ -1,27 +1,116 @@
-// Navbar Burger Menu 
-const menuShow = (toggleId, navId) => {
-    const toggle = document.getElementById(toggleId);
-    const nav = document.getElementById(navId);
+$(document).ready(function() {
+    $('.jitter').mouseenter(function() {
+      if ($(this).hasClass('cycling') == false) {
+        $(this).charcycle({
+          'target': '#text'
+        });
+      }
+    });
+  });
 
-    if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-            nav.classList.toggle('show')
-        })
+(function($) {
+
+    $.fn.charcycle = function(options) {
+      var settings = {
+          target: "",
+          sender: $(this),
+          id: $(this).attr('id'),
+          timer_is_on: 1,
+          quoteDis: "",
+          quoteLoc: 0,
+          speed: 30,
+          quotePic: "....fgh......_____----hr--~`;'--~/--- ---asd----10?`, ",
+          quotePic2: "..-_-10?`,abcdefghijklmnopqrstuvwxyz123456789080-~`;' ",
+          quotePic3: "......................................................",
+          quoteStr: "",
+          targetElement: ""
+        }
+        //var quoteStr;
+        //var targetElement;
+      var quoteLen;
+      var quoteMax;
+      var rndRange;
+      var t;
+  
+      return this.each(function() {
+  
+        if (options) {
+          $.extend(settings, options);
+        }
+  
+        $(this).addClass('cycling');
+  
+        settings.targetElement = $(this).find(settings.target);
+        settings.quoteStr = settings.targetElement.text();
+  
+        startQuote();
+  
+        function padQuote() {
+          for (var i = settings.quoteStr.length; i < quoteMax; i++) {
+            settings.quoteStr = "" + settings.quoteStr + " ";
+          }
+        }
+  
+        function disQuote() {
+          settings.quoteDis = settings.quoteStr.substring(0, settings.quoteLoc);
+  
+          for (var i = settings.quoteLoc; i < quoteMax; i++) {
+  
+            var charone;
+            charone = settings.quoteStr.substring(i, i + 1);
+  
+            var rdnum;
+            rdnum = Math.floor(Math.random() * rndRange)
+  
+            if (i < quoteMax && i > quoteMax - 3) {
+              settings.quoteDis = "" + settings.quoteDis + settings.quotePic3.substring(rdnum, rdnum + 1);
+            } else if (i > settings.quoteLoc + 7 && i < settings.quoteLoc + 14) {
+  
+              settings.quoteDis = "" + settings.quoteDis + settings.quotePic.substring(rdnum, rdnum + 1);
+            } else {
+  
+              settings.quoteDis = "" + settings.quoteDis + settings.quotePic2.substring(rdnum, rdnum + 1);
+            }
+          }
+          settings.quoteLoc = settings.quoteLoc + 1;
+          if (settings.quoteLoc == quoteLen + 2) {
+            //$("#"+settings.id).removeClass('cycling');
+            settings.sender.removeClass('cycling');
+            clearTimeout(t);
+            settings.timer_is_on = 0;
+          }
+        }
+  
+        function loopQuote(target) {
+  
+          settings.targetElement.text(settings.quoteDis);
+          disQuote();
+  
+          if (settings.timer_is_on == 1) {
+            t = setTimeout(function() {
+              loopQuote(target)
+            }, settings.speed);
+            settings.speed = settings.speed + 0.75;
+          }
+  
+          if (quoteMax < quoteLen) {
+            quoteMax = quoteMax + 3;
+          }
+        }
+  
+        function startQuote() {
+  
+          quoteMax = settings.quoteStr.length;
+          rndRange = settings.quotePic.length;
+          quoteLen = settings.quoteStr.length;
+  
+          padQuote();
+          disQuote();
+          loopQuote();
+  
+        }
+  
+      });
     }
-};
-
-menuShow('nav-burger', 'nav-menu');
-
-const navLink = document.querySelectorAll('.nav-link');
-
-function linkAction() {
-    // Active link
-    navLink.forEach(n => n.classList.remove('active'));
-    this.classList.add('add');
-
-    // Removing mobile menu 
-    const navMenu = document.getElementById('nav-menu');
-    navMenu.classList.remove('show');
-}
-
-navLink.forEach(n => n.addEventListener('click', linkAction));
+  
+  })(jQuery);
