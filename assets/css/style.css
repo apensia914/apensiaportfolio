@@ -1,59 +1,68 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 body {
   font-family: 'Source Code Pro', monospace;
-  background-color: black;
-}
+  background-color: black; }
 
 a {
   text-decoration: none;
-  color: white;
-}
+  color: white; }
+
+section {
+  color: #2DDEB0; }
 
 .wrapper {
   margin-left: 7em;
-  margin-top: 5em;
-}
+  margin-top: 7.5em; }
+  .wrapper .jitter {
+    font-size: 6rem; }
+    .wrapper .jitter:hover {
+      animation: move .1s ease-out forwards; }
+    .wrapper .jitter a:hover {
+      color: #2DDEB0; }
 
-.wrapper .jitter {
-  font-size: 6rem;
-  line-height: 150px;
-}
+.section-title {
+  font-size: 4.5rem;
+  text-align: center;
+  margin-top: 1em; }
+  .section-title h1 {
+    overflow: hidden;
+    border-right: .15em solid #2DDEB0;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 1.5s steps(30, end), blink-caret 0.5s step-end infinite; }
 
-.wrapper .jitter:hover {
-  -webkit-animation: move .1s ease-out forwards;
-          animation: move .1s ease-out forwards;
-}
-
-.wrapper .jitter a:hover {
-  color: #2DDEB0;
-}
-
-@-webkit-keyframes move {
-  0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-  100% {
-    -webkit-transform: translateX(50px);
-            transform: translateX(50px);
-  }
-}
+.main-message {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 2em 3.5em;
+  line-height: 1.8;
+  font-family: "Lato", sans-serif; }
+  .main-message p {
+    margin-top: 1.3em;
+    margin-bottom: 1.3em; }
 
 @keyframes move {
   0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
+    transform: translateX(0); }
   100% {
-    -webkit-transform: translateX(50px);
-            transform: translateX(50px);
-  }
-}
-/*# sourceMappingURL=style.css.map */
+    transform: translateX(50px); } }
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0; }
+  to {
+    width: 100%; } }
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent; }
+  50% {
+    border-color: #2DDEB0; } }

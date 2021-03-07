@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+$base-color: #2DDEB0;
+$paragraph-font: 'Lato', sans-serif;
+// $sub-color: #6C716F;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+section {
+    color: $base-color;
+}
+
+// Main
+
+.wrapper {
+    margin-left: 7em;
+    margin-top: 7.5em;
+
+    .jitter {
+        font-size: 6rem;
+        
+        &:hover {
+            animation: move .1s ease-out forwards;
+        }
+
+        a {
+            &:hover {
+                color: $base-color;
+            }
+        }
+    }
+}
+
+// About Section 
+
+.section-title {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-top: 1em;
+
+    h1 {
+        overflow: hidden;
+        border-right: .15em solid #2DDEB0;
+        white-space: nowrap;
+        margin: 0 auto;
+        animation: typing 1.5s steps(30, end), 
+        blink-caret .5s step-end infinite;
+    }
+}   
+
+.main-message {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 2em 3.5em;
+    line-height: 1.8;
+    font-family: $paragraph-font;
+
+    p {
+        margin-top: 1.3em;
+        margin-bottom: 1.3em;
+    }
+}
+
+// Animation
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(50px);
+    }
+}
+
+/* The typing effect */
+@keyframes typing {
+    from {
+        width: 0 
+    }
+
+    to {
+        width: 100% 
+    }
+}
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { 
+        border-color: transparent 
+    }
+
+    50% { 
+        border-color: $base-color 
+    }
+}
